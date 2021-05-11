@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+
+  #before_action :authenticate_user!
+  #load_and_authorize_resource :only => [:index]
+
     def new
         @article = Article.new
     end
@@ -9,14 +13,23 @@ class ArticlesController < ApplicationController
 
     def index
         @articles = Article.all
+        respond_to do |format|
+            format.html
+            format.json {render json: @articles}
+        end
     end
     def show
         @article = Article.find(params[:id])
+        respond_to do |format|
+            format.html
+            format.json {render json: @article}
+        end
     end
 
     def create
-        @article = Article.new(article_params)
- 
+        @article =current_user.articles.build(article_params)
+        #@article =Article.new(article_params)
+
         if @article.save
             redirect_to @article
         else
@@ -27,7 +40,7 @@ class ArticlesController < ApplicationController
     def update
         @article = Article.find(params[:id])
        
-        if @article.update(article_params)
+        if @article.update(article_params.merge(user_id: current_user.id))
           redirect_to @article
         else
           render 'edit'
@@ -42,6 +55,6 @@ class ArticlesController < ApplicationController
     end
     private
         def article_params
-            params.require(:article).permit(:title, :text)
+            params.require(:article).permit(:title, :text )
         end
 end

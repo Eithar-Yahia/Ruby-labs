@@ -29,7 +29,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'bootstrap', '~> 5.0.0'
 gem 'jquery-rails'
-
+gem 'active_model_serializers'
+gem 'jwt'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
