@@ -31,6 +31,8 @@ gem 'bootstrap', '~> 5.0.0'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'jwt'
+gem 'cancancan'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

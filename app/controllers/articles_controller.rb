@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
   #before_action :authenticate_user!
   #load_and_authorize_resource :only => [:index]
-
+  load_and_authorize_resource
     def new
         @article = Article.new
     end
@@ -20,6 +20,8 @@ class ArticlesController < ApplicationController
     end
     def show
         @article = Article.find(params[:id])
+        authorize! :read, @article
+
         respond_to do |format|
             format.html
             format.json {render json: @article}
